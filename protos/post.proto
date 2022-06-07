@@ -1,0 +1,42 @@
+syntax="proto3";
+
+package user;
+
+service PostService {
+    rpc CreatePost(Post) returns (Post);
+    rpc GetUserPosts(GetUserPostsReq) returns (GetUserPostsRes);
+    rpc GetUserWithPost(GetUserPostsReq) returns (GetUserWithPostRes);
+}
+
+message Post {
+    string id =1;
+    string user_id=2;
+    string title = 3;
+    string description = 4;
+    repeated Media medias = 5;
+}
+
+message CreatePostRes {
+    bool status=1;
+}
+
+message Media {
+    string id =1;
+    string post_id = 2;
+    string link = 3;
+    string type = 4;
+} 
+
+message GetUserPostsReq {
+    string user_id =1;
+}
+
+message GetUserPostsRes {
+    repeated Post posts = 1;
+}
+
+message GetUserWithPostRes { 
+    string id = 1;
+    string name = 2;
+    repeated Post posts = 3;
+}
