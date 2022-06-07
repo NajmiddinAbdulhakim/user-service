@@ -5,6 +5,7 @@ import (
 
 	"github.com/jmoiron/sqlx"
 	pb "github.com/template-service/genproto"
+	// user "github.com/template-service/genproto"
 	l "github.com/template-service/pkg/logger"
 	cl "github.com/template-service/service/grpc_client"
 	"github.com/template-service/storage"
@@ -28,26 +29,27 @@ func NewUserService(db *sqlx.DB, log l.Logger, client cl.GrpcClientI) *UserServi
 	}
 }
 
-func (s *UserService) CreateUser(ctx context.Context, req *pb.User) (*pb.UserResponse, error) {
+func (s *UserService) CreateUser(ctx context.Context, req *pb.User) (*pb.User, error) {
 	user, err := s.storage.User().CreateUser(req)
 	if err != nil {
 		s.logger.Error(`Filed while inserting user`, l.Error(err))
 		return nil, status.Error(codes.Internal,`Filed while inserting user` )
 	}
-	postt := req.Posts
-	post, err := s.client.PostService().CreatePost(ctx,postt)
+	for _,postt := range req.Posts {
+		postt.UserId = user.Id
+		post, err := s.client.PostService().CreatePost(ctx, postt)
+		if err != nil {
+			s.logger.Error(`Filed while inserting user`, l.Error(err))
+			return nil, status.Error(codes.Internal,`Filed while inserting user` )
+		}
+		user.Posts = append(user.Posts, post)
+	}
 	
-	user.Posts = append(user.Posts,post)
-	return &pb.UserResponse{
-		UserId: user.UserId,
-		UserName: user.UserName,
-		Email:    user.Email,
-		Posts: user.Posts, 
-	}, nil
+	return user, nil
 
 }
 
-func (s *UserService) UpdateUser(ctx context.Context, req *pb.UpdateUserName) (*pb.BoolResponse, error) {
+func (s *UserService) UpdateUser(ctx context.Context, req *pb.UpdateUserReq) (*pb.UpdateUserRes, error) {
 	res, err := s.storage.User().UpdateUser(req)
 	if err != nil {
 		s.logger.Error(`Filed while updating user_name`, l.Error(err))
@@ -56,7 +58,7 @@ func (s *UserService) UpdateUser(ctx context.Context, req *pb.UpdateUserName) (*
 	return res, nil
 }
 
-func (s *UserService) GetUserById(ctx context.Context, req *pb.UserByIdRequest) (*pb.UserResponse, error) {
+func (s *UserService) GetUserByIdWithPosts(ctx context.Context, req *pb.UserByIdReq) (*pb.User, error) {
 	user, err := s.storage.User().GetUserById(req.Id)
 	if err != nil {
 		s.logger.Error(`Filed while getting user by id`, l.Error(err))
@@ -68,22 +70,36 @@ func (s *UserService) GetUserById(ctx context.Context, req *pb.UserByIdRequest) 
 		return nil, status.Error(codes.Internal,`Filed while getting posts user by id` )
 	}
 
+	user.Posts = posts.Posts
 	
-	return &pb.UserResponse{
-		UserId: user.Id,
-		UserName: user.UserName,
-		Email:    user.Email,
-		Posts: posts.Posts, 
-	}, nil
+	return user, nil
 }
 
+func (s *UserService) GetUserById(ctx context.Context, req *pb.UserByIdReq) (*pb.User, error) {
+	user, err := s.storage.User().GetUserById(req.Id)
+	if err != nil {
+		s.logger.Error(`Filed while getting user by id`, l.Error(err))
+		return nil, status.Error(codes.Internal,`Filed while getting user by id` )
+	}
+	return user, nil
+}
 func (s *UserService) GetAllUsers(ctx context.Context, req *pb.Empty) (*pb.GetAllUsersResponse, error) {
 	users, err := s.storage.User().GetAllUsers()
 	if err != nil {
 		s.logger.Error(`Filed while getting users`, l.Error(err))
 		return nil, status.Error(codes.Internal,`Filed while getting users` )
 	}
-	return &pb.GetAllUsersResponse{Users: users}, nil
+	var us []*pb.User
+	for _, user := range users {
+		posts, err := s.client.PostService().GetUserPosts(ctx,&pb.GetUserPostsReq{UserId: user.Id})
+		if err != nil {
+			s.logger.Error(`Filed while getting user posts`, l.Error(err))
+			return nil, status.Error(codes.Internal,`Filed while getting user posts` )
+		}
+		user.Posts = posts.Posts
+		us = append(us,user)
+	}
+	return &pb.GetAllUsersResponse{Users: us}, nil
 }
 
 

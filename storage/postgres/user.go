@@ -19,7 +19,7 @@ func NewUserRepo(db *sqlx.DB) *UserRepo {
 	return &UserRepo{db: db}
 }
 
-func (r *UserRepo) CreateUser(user *pb.User) (*pb.UserResponse, error) {
+func (r *UserRepo) CreateUser(user *pb.User) (*pb.User, error) {
 	tx, err := r.db.Begin()
 	if err != nil {
 		return nil, err
@@ -52,7 +52,7 @@ func (r *UserRepo) CreateUser(user *pb.User) (*pb.UserResponse, error) {
 	queryAddress := `INSERT INTO addresses (user_id, country, city, district, postalcode)
     VALUES ($1, $2, $3, $4, $5) RETURNING country, city, district, postalcode`
 	for _, addr := range user.Addresses {
-		err = tx.QueryRow(queryAddress, id, addr.Country, addr.City, addr.District, addr.PostalCode).Scan(
+		err = tx.QueryRow(queryAddress, usr.Id, addr.Country, addr.City, addr.District, addr.PostalCode).Scan(
 			&addr.Country, &addr.City, &addr.District, &addr.PostalCode,
 		)
 		if err != nil {
@@ -62,28 +62,24 @@ func (r *UserRepo) CreateUser(user *pb.User) (*pb.UserResponse, error) {
 		usr.Addresses = append(usr.Addresses, addr)
 	}
 	tx.Commit()
-	return &pb.UserResponse{
-		UserId: usr.Id,
-		UserName: usr.UserName,
-		Email:    usr.Email,
-		Posts: nil, 
-	}, nil
+	return &usr, nil
 
 }
 
-func (r *UserRepo) UpdateUser(user *pb.UpdateUserName) (*pb.BoolResponse, error) {
+func (r *UserRepo) UpdateUser(user *pb.UpdateUserReq) (*pb.UpdateUserRes, error) {
 	tx, err := r.db.Begin()
 	if err != nil {
 		tx.Rollback()
-		return &pb.BoolResponse{Success: false}, err
+		return nil, err
 	}
 	query := `UPDATE users SET user_name = $1 WHERE id = $2`
 	_, err = tx.Exec(query, user.NewUserName, user.Id)
 	if err != nil {
 		tx.Rollback()
-		return &pb.BoolResponse{Success: false}, err
+		return nil, err
 	}
-	return &pb.BoolResponse{Success: true}, nil
+	tx.Commit()
+	return &pb.UpdateUserRes{Update: true}, nil
 }
 
 func (r *UserRepo) GetUserById(userID string) (*pb.User, error) {

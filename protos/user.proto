@@ -5,9 +5,10 @@ import "post.proto";
 
 
 service UserService {
-    rpc CreateUser(User) returns (UserResponse);
-    rpc UpdateUser(UpdateUserName) returns (BoolResponse);
-    rpc GetUserById(UserByIdRequest) returns (UserResponse);
+    rpc CreateUser(User) returns (User);
+    rpc UpdateUser(UpdateUserReq) returns (UpdateUserRes);
+    rpc GetUserById(UserByIdReq) returns (User);
+    rpc GetUserByIdWithPosts(UserByIdReq) returns (User);
     rpc GetAllUsers(Empty) returns (GetAllUsersResponse);
 }
 
@@ -19,7 +20,7 @@ message User {
     string email = 5;
     repeated string phone_number = 6;
     repeated Address addresses = 7;
-    Post posts = 8;
+    repeated Post posts = 8;
     string bio = 9;
     string status = 10;
     string createdAt = 11;
@@ -34,20 +35,7 @@ message Address {
     int64 postal_code = 4;
 }
 
-message BoolResponse {
-    bool success = 1;
-}
-
-message UserResponse {
-    string UserId = 1;
-    string user_name = 2;
-    string email = 3;
-    repeated Post posts = 4;
-
-    
-}
-
-message UserByIdRequest {
+message UserByIdReq {
     string id = 1;
 }
 
@@ -55,9 +43,12 @@ message GetAllUsersResponse {
     repeated User users = 1;
 }
 
-message UpdateUserName {
+message UpdateUserReq {
     string id = 1;
     string new_user_name = 2;
+}
+message UpdateUserRes {
+    bool update = 1;
 }
 
 message Empty {   
