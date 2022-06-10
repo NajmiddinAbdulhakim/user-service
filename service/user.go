@@ -52,10 +52,10 @@ func (s *UserService) CreateUser(ctx context.Context, req *pb.User) (*pb.User, e
 func (s *UserService) UpdateUser(ctx context.Context, req *pb.UpdateUserReq) (*pb.UpdateUserRes, error) {
 	res, err := s.storage.User().UpdateUser(req)
 	if err != nil {
-		s.logger.Error(`Filed while updating user_name`, l.Error(err))
-		return nil, status.Error(codes.Internal,`Filed while updating user_name` )
+		s.logger.Error(`Filed while updating user`, l.Error(err))
+		return nil, status.Error(codes.Internal,`Filed while updating user` )
 	}
-	return res, nil
+	return &pb.UpdateUserRes{Success: res}, nil
 }
 
 func (s *UserService) GetUserByIdWithPosts(ctx context.Context, req *pb.UserByIdReq) (*pb.User, error) {
@@ -83,6 +83,16 @@ func (s *UserService) GetUserById(ctx context.Context, req *pb.UserByIdReq) (*pb
 	}
 	return user, nil
 }
+
+func (s *UserService) DeleteUser(ctx context.Context, req *pb.UserByIdReq) (*pb.UpdateUserRes, error) {
+	res, err := s.storage.User().DeleteUser(req.Id)
+	if err != nil {
+		s.logger.Error(`Filed while delete user`, l.Error(err))
+		return nil, status.Error(codes.Internal,`Filed while delete user` )
+	}
+	return &pb.UpdateUserRes{Success: res}, nil
+}
+
 func (s *UserService) GetAllUsers(ctx context.Context, req *pb.Empty) (*pb.GetAllUsersResponse, error) {
 	users, err := s.storage.User().GetAllUsers()
 	if err != nil {
@@ -102,4 +112,22 @@ func (s *UserService) GetAllUsers(ctx context.Context, req *pb.Empty) (*pb.GetAl
 	return &pb.GetAllUsersResponse{Users: us}, nil
 }
 
+func (s *UserService) GetListUsers(ctx context.Context, req *pb.GetUserListReq) (*pb.GetUserListRes, error) {
+	users, count, err := s.storage.User().GetListUsers(req.Page, req.Limit)
+	if err != nil {
+		s.logger.Error(`Filed while getting users list`, l.Error(err))
+		return nil, status.Error(codes.Internal,`Filed while getting users list` )
+	}
+	var us []*pb.User
+	for _, user := range users {
+		posts, err := s.client.PostService().GetUserPosts(ctx,&pb.GetUserPostsReq{UserId: user.Id})
+		if err != nil {
+			s.logger.Error(`Filed while getting user posts`, l.Error(err))
+			return nil, status.Error(codes.Internal,`Filed while getting user posts` )
+		}
+		user.Posts = posts.Posts
+		us = append(us,user)
+	}
+	return &pb.GetUserListRes{Users: us, Count: count}, nil
 
+}

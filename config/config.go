@@ -38,7 +38,7 @@ func Load() Config {
 	c.PostServicePort = cast.ToInt(getOrReturnDefault("POST_SERVICE_PORT", 7100))
 	c.LogLevel = cast.ToString(getOrReturnDefault("LOG_LEVEL", "debug"))
 
-	c.RPCPort = cast.ToString(getOrReturnDefault("RPC_PORT", ":8888"))
+	c.RPCPort = cast.ToString(getOrReturnDefault("RPC_PORT", ":9999"))
 
 	return c
 }

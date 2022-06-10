@@ -6,13 +6,14 @@ CREATE TABLE IF NOT EXISTS users (
     email varchar(50) NOT NULL UNIQUE,
     phone_number TEXT [],
     bio TEXT,
-    status varchar(20),
+    status varchar(50),
     created_at TIMESTAMP,
     updated_at TIMESTAMP,
     deleted_at TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS adresses (
+CREATE TABLE IF NOT EXISTS addresses (
+    id uuid NOT NULL,
     user_id uuid NOT NULL,
     country varchar(50) NOT NULL,
     city varchar(50) NOT NULL,

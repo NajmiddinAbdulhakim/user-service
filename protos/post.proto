@@ -4,9 +4,12 @@ package user;
 
 service PostService {
     rpc CreatePost(Post) returns (Post);
-    rpc GetPostById(GetPostReq) returns (Post);
+    rpc UpdatePost(Post) returns (BoolResponse);
+    rpc DeletePost(PostByIdReq) returns (BoolResponse);
+    rpc GetPostById(PostByIdReq) returns (Post);
+    rpc GetAllPosts(Empty) returns (GetAllPostsRes);
     rpc GetUserPosts(GetUserPostsReq) returns (GetUserPostsRes);
-    rpc GetPostWithUser(GetPostReq) returns (GetUserWithPostRes);
+    rpc GetPostWithUser(PostByIdReq) returns (GetPostWithUserRes);
 }
 
 message Post {
@@ -15,10 +18,21 @@ message Post {
     string title = 3;
     string description = 4;
     repeated Media medias = 5;
+    string createdAt = 6;
+    string updatedAt = 7;
+    string deletedAt = 8;
 }
 
-message CreatePostRes {
-    bool status=1;
+message BoolResponse {
+    bool success = 1;
+}
+
+message Empty {
+
+}
+
+message GetAllPostsRes {
+    repeated Post posts = 1;
 }
 
 message Media {
@@ -32,15 +46,17 @@ message GetUserPostsReq {
     string user_id =1;
 }
 
-message GetPostReq {
+message PostByIdReq {
     string post_id = 1;
 }
 
 message GetUserPostsRes {
-    repeated Post posts = 1;
+    string first_name = 1;
+    string last_name = 2;
+    repeated Post posts = 3;
 }
 
-message GetUserWithPostRes { 
+message GetPostWithUserRes { 
     string first_name = 1;
     string last_name = 2;
     Post post = 3;

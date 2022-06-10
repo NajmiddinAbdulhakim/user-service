@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Jun  8 10:02:47 2022
+# Make data base, printed on Fri Jun 10 07:04:42 2022
 
 # Variables
 
@@ -49,11 +49,9 @@ SHELL = /bin/sh
 # environment
 SNAP_DATA = /var/snap/code/97
 # environment
-VTE_VERSION = 6003
-# environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
-JOURNAL_STREAM = 8:50505
+JOURNAL_STREAM = 8:52261
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # environment
@@ -79,13 +77,15 @@ DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-MANAGERPID = 1011
+_ = /snap/code/97/usr/share/code/code
+# environment
+MANAGERPID = 1051
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
 LC_NAME = uz_UZ.UTF-8
 # environment
-VSCODE_CWD = /home/najmiddin/go/src/github.com/NajmiddinAbdulhakim/user-service
+VSCODE_CWD = /home/najmiddin
 # environment
 GOPROXY = https://proxy.golang.org,direct
 # environment
@@ -93,11 +93,11 @@ GSETTINGS_SCHEMA_DIR = /snap/code/97/usr/share/glib-2.0/schemas
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
-PATH = /home/najmiddin/anaconda3/condabin:/home/najmiddin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/go/bin:/home/najmiddin/go/bin:/home/najmiddin/go/bin:/usr/local/go/bin
+PATH = /home/najmiddin/.local/bin:/home/najmiddin/anaconda3/condabin:/home/najmiddin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/go/bin
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/Najmiddin:@/tmp/.ICE-unix/1423,unix/Najmiddin:/tmp/.ICE-unix/1423
+SESSION_MANAGER = local/Najmiddin:@/tmp/.ICE-unix/1468,unix/Najmiddin:/tmp/.ICE-unix/1468
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -105,7 +105,7 @@ GDK_PIXBUF_MODULE_FILE = /home/najmiddin/snap/code/common/.cache/gdk-pixbuf-load
 # environment
 SNAP = /snap/code/97
 # environment
-GOPATH = /home/najmiddin/go
+GOPATH = /home/najmiddin/projects/go
 # environment
 SNAP_VERSION = c3511e6c
 # environment
@@ -117,19 +117,19 @@ DISABLE_WAYLAND = 1
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = 72e9490498b14a6daadc8cbd71ad7b26
+INVOCATION_ID = 74a920e31958478588f54bff19be1c1e
 # environment
 GDK_PIXBUF_MODULEDIR = /snap/code/97/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
-LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+LS_COLORS = 
 # environment
 XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 8221
+GIO_LAUNCHED_DESKTOP_FILE_PID = 3633
 # automatic
 %F = $(notdir $%)
 # environment
@@ -145,13 +145,13 @@ PWD = /home/najmiddin/go/src/github.com/NajmiddinAbdulhakim/user-service
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 1346
+SSH_AGENT_PID = 1387
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
 GTK_MODULES = gail:atk-bridge
 # environment
-GOMODCACHE = /home/najmiddin/go/pkg/mod
+GOMODCACHE = /home/najmiddin/projects/go/pkg/mod
 # environment
 HOME = /home/najmiddin
 # environment
@@ -184,8 +184,6 @@ GNOME_DESKTOP_SESSION_ID = this-is-deprecated
 LC_TIME = uz_UZ.UTF-8
 # environment
 SNAP_REAL_HOME = /home/najmiddin
-# environment
-COLORTERM = truecolor
 # default
 MAKE = $(MAKE_COMMAND)
 # default
@@ -195,11 +193,11 @@ QT_IM_MODULE = ibus
 # environment
 SNAP_USER_DATA = /home/najmiddin/snap/code/97
 # environment
-SHLVL = 1
+SHLVL = 0
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-f13a4a84-26f3-4f59-9a25-fee878d23648.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-e1212d9d-d1f3-42d7-946b-da3dc6b90378.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -220,8 +218,6 @@ LC_TELEPHONE = uz_UZ.UTF-8
 CONDA_SHLVL = 0
 # default
 MAKE_COMMAND := make
-# environment
-OLDPWD = /home/najmiddin/go/src/github.com/NajmiddinAbdulhakim
 # default
 .VARIABLES := 
 # automatic
@@ -245,8 +241,6 @@ GDK_BACKEND = x11
 # environment
 LC_PAPER = uz_UZ.UTF-8
 # environment
-NO_AT_BRIDGE = 1
-# environment
 LC_IDENTIFICATION = uz_UZ.UTF-8
 # environment
 QT_ACCESSIBILITY = 1
@@ -268,17 +262,12 @@ LC_ALL = C
 CONDA_PYTHON_EXE = /home/najmiddin/anaconda3/bin/python
 # environment
 GJS_DEBUG_TOPICS = JS ERROR;JS LOG
-# environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/9e6cb58b_d392_4ebc_bd14_b4eb89a3ca12
 # automatic
 ^F = $(notdir $^)
-# environment
-GNOME_TERMINAL_SERVICE = :1.152
 # default
 SUFFIXES := 
 # environment
 SNAP_REEXEC = 
- 
 # environment
 _CE_M = 
 # environment
@@ -290,19 +279,18 @@ WINDOWPATH = 2
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # default
+ 
 .RECIPEPREFIX := 
 # environment
 LC_ADDRESS = uz_UZ.UTF-8
 # environment
 LANG = C
 # environment
-TERM = xterm-256color
-# environment
-VSCODE_PID = 8305
+VSCODE_PID = 3695
 # environment
 _CE_CONDA = 
 # variable set hash-table stats:
-# Load=144/1024=14%, Rehash=0, Collisions=24/169=14%
+# Load=138/1024=13%, Rehash=0, Collisions=25/163=15%
 
 # Pattern-specific Variable Values
 
@@ -369,6 +357,6 @@ build:
 # strcache performance: lookups = 30 / hit rate = 20%
 # hash-table stats:
 # Load=24/8192=0%, Rehash=0, Collisions=1/30=3%
-# Finished Make data base on Wed Jun  8 10:02:47 2022
+# Finished Make data base on Fri Jun 10 07:04:42 2022
 
  

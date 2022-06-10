@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/google/uuid"
+	"github.com/gofrs/uuid"
+
 	"github.com/jmoiron/sqlx"
 	"github.com/lib/pq"
 	pb "github.com/template-service/genproto"
@@ -24,15 +25,15 @@ func (r *UserRepo) CreateUser(user *pb.User) (*pb.User, error) {
 	if err != nil {
 		return nil, err
 	}
-	id := uuid.New()
+	id,_ := uuid.NewV4()
 	time := time.Now()
 
 	var usr pb.User
 	query := `INSERT INTO users (
-        id, first_name, last_name, user_name, email, phone_number, bio, status, created_at, updated_at)
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) 
-        RETURNING id, first_name, last_name, user_name, email, phone_number, bio, status, created_at, updated_at`
-	err = tx.QueryRow(query, id, user.FirstName, user.LastName, user.UserName, user.Email, pq.Array(user.PhoneNumber), user.Bio, user.Status, time, time).Scan(
+        id, first_name, last_name, user_name, email, phone_number, bio, status, created_at)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) 
+        RETURNING id, first_name, last_name, user_name, email, phone_number, bio, status, created_at`
+	err = tx.QueryRow(query, id, user.FirstName, user.LastName, user.UserName, user.Email, pq.Array(user.PhoneNumber), user.Bio, user.Status, time).Scan(
 		&usr.Id,
 		&usr.FirstName,
 		&usr.LastName,
@@ -42,18 +43,18 @@ func (r *UserRepo) CreateUser(user *pb.User) (*pb.User, error) {
 		&usr.Bio,
 		&usr.Status,
 		&usr.CreatedAt,
-		&usr.UpdatedAt,
 	)
 	if err != nil {
 		tx.Rollback()
-		return nil, err
+		return nil, fmt.Errorf(`ka;;a ? %v`, err)
 	}
-
-	queryAddress := `INSERT INTO addresses (user_id, country, city, district, postalcode)
-    VALUES ($1, $2, $3, $4, $5) RETURNING country, city, district, postalcode`
+	
+	queryAddress := `INSERT INTO addresses (id, user_id, country, city, district, postalcode)
+    VALUES ($1, $2, $3, $4, $5, $6) RETURNING id, country, city, district, postalcode`
 	for _, addr := range user.Addresses {
-		err = tx.QueryRow(queryAddress, usr.Id, addr.Country, addr.City, addr.District, addr.PostalCode).Scan(
-			&addr.Country, &addr.City, &addr.District, &addr.PostalCode,
+		addr_id,_ := uuid.NewV4()
+		err = tx.QueryRow(queryAddress,addr_id , usr.Id, addr.Country, addr.City, addr.District, addr.PostalCode).Scan(
+			&addr.Id,&addr.Country, &addr.City, &addr.District, &addr.PostalCode,
 		)
 		if err != nil {
 			tx.Rollback()
@@ -63,29 +64,33 @@ func (r *UserRepo) CreateUser(user *pb.User) (*pb.User, error) {
 	}
 	tx.Commit()
 	return &usr, nil
-
 }
 
-func (r *UserRepo) UpdateUser(user *pb.UpdateUserReq) (*pb.UpdateUserRes, error) {
-	tx, err := r.db.Begin()
+func (r *UserRepo) UpdateUser(user *pb.UpdateUserReq) (bool, error) {
+	time := time.Now()
+
+	query := `UPDATE users SET first_name = $1, last_name = $2, 
+	user_name = $3, email = $4, phone_number = $5, bio = $6, 
+	status = $7, updated_at = $8 WHERE id = $9`
+	_, err := r.db.Exec(query, user.FirstName, user.LastName, user.UserName, 
+		user.Email, pq.Array(user.PhoneNumber), user.Bio, user.Status, time, user.Id)
 	if err != nil {
-		tx.Rollback()
-		return nil, err
+		return false, err
 	}
-	query := `UPDATE users SET user_name = $1 WHERE id = $2`
-	_, err = tx.Exec(query, user.NewUserName, user.Id)
-	if err != nil {
-		tx.Rollback()
-		return nil, err
+	queryA := `UPDATE addresses SET country = $1, city = $2, district = $3, postalcode = $4 WHERE user_id = $5 AND id = $6`
+	for _, addr := range user.Addresses {
+		_, err := r.db.Exec(queryA,addr.Country, addr.City, addr.District, addr.PostalCode, user.Id,addr.Id)
+		if err != nil {
+			return false, err
+		}
 	}
-	tx.Commit()
-	return &pb.UpdateUserRes{Update: true}, nil
+	return true, nil
 }
 
 func (r *UserRepo) GetUserById(userID string) (*pb.User, error) {
 	var usr pb.User
 	query := `SELECT id, first_name, last_name, user_name, 
-	email, phone_number, bio, status FROM users WHERE id = $1`
+	email, phone_number, bio, status FROM users WHERE id = $1 AND deleted_at IS NULL`
 	rows, err := r.db.Query(query, userID)
 	if err != nil {
 		return nil, err
@@ -135,7 +140,7 @@ func (r *UserRepo) GetAllUsers() ([]*pb.User, error) {
 	var users []*pb.User
 
 	rows, err := r.db.Query(`SELECT id, first_name, last_name, user_name, 
-	email, phone_number, bio, status FROM users`)
+	email, phone_number, bio, status FROM users WHERE deleted_at IS NULL ` )
 	if err != nil {
 		return nil, err
 	}
@@ -179,3 +184,72 @@ func (r *UserRepo) GetAllUsers() ([]*pb.User, error) {
 	}
 	return users, nil
 }
+
+func (r *UserRepo) DeleteUser(userID string) (bool, error) {
+	time := time.Now()
+
+	query := `UPDATE users SET deleted_at = $1 WHERE id = $2`
+	_, err := r.db.Exec(query, time, userID)
+	if err != nil {
+		return false, err
+	}
+	return true, nil
+}
+
+func (r *UserRepo) GetListUsers(page, limit int64) ([]*pb.User, int64, error) {
+	var users []*pb.User
+	offset := (page - 1) * limit
+
+	query := `SELECT id, first_name, last_name, user_name, 
+	email, phone_number, bio, status, updated_at FROM users order by first_name OFFSET $1 LIMIT $2` 
+	rows, err := r.db.Query(query, offset, limit)
+	if err != nil {
+		return nil, 0, err
+	}	
+	for rows.Next() {
+		var user pb.User
+		err := rows.Scan(
+			&user.Id,
+			&user.FirstName,
+			&user.LastName,
+			&user.UserName,
+			&user.Email, 
+			pq.Array(&user.PhoneNumber), 
+			&user.Bio,
+			&user.Status, 
+			&user.UpdatedAt,
+		)
+		if err != nil {
+			return nil,0, err
+		}
+				
+		queryAddr := `SELECT country, city, district, postalcode FROM addresses WHERE user_id = $1`
+		rowss, err := r.db.Query(queryAddr, user.Id)
+		if err != nil {
+			return nil,0, fmt.Errorf(`error getting user address by id >%v`, err)
+		}
+
+		for rowss.Next() {
+			var adrs pb.Address
+			err = rowss.Scan(
+				&adrs.Country,
+				&adrs.City,
+				&adrs.District,
+				&adrs.PostalCode,
+			)
+			if err != nil {
+				return nil,0, fmt.Errorf(`error getting user address scan by id >%v`, err)
+			}
+			user.Addresses = append(user.Addresses, &adrs)
+		}
+		users = append(users, &user)
+	}
+	var count int64
+	err = r.db.QueryRow(`SELECT COUNT(*) FROM users`).Scan(
+		&count,
+	)
+	if err != nil {
+		return nil,0,err
+	}
+	return users, count ,nil
+}	
