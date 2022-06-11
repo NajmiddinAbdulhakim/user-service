@@ -1,4 +1,4 @@
-module github.com/template-service
+module github.com/NajmiddinAbdulhakim/user-service
 
 go 1.18
 
@@ -9,7 +9,7 @@ require (
 	github.com/lib/pq v1.10.6
 	github.com/spf13/cast v1.5.0
 	go.uber.org/zap v1.21.0
-	google.golang.org/grpc v1.46.2
+	google.golang.org/grpc v1.47.0
 )
 
 require (

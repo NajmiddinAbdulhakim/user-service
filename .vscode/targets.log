@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Jun 10 07:04:42 2022
+# Make data base, printed on Sat Jun 11 09:41:51 2022
 
 # Variables
 
@@ -47,11 +47,11 @@ CURDIR := /home/najmiddin/go/src/github.com/NajmiddinAbdulhakim/user-service
 # makefile
 SHELL = /bin/sh
 # environment
-SNAP_DATA = /var/snap/code/97
+SNAP_DATA = /var/snap/code/98
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
-JOURNAL_STREAM = 8:52261
+JOURNAL_STREAM = 8:47624
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # environment
@@ -77,9 +77,9 @@ DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-_ = /snap/code/97/usr/share/code/code
+_ = /snap/code/98/usr/share/code/code
 # environment
-MANAGERPID = 1051
+MANAGERPID = 1042
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
@@ -89,7 +89,7 @@ VSCODE_CWD = /home/najmiddin
 # environment
 GOPROXY = https://proxy.golang.org,direct
 # environment
-GSETTINGS_SCHEMA_DIR = /snap/code/97/usr/share/glib-2.0/schemas
+GSETTINGS_SCHEMA_DIR = /snap/code/98/usr/share/glib-2.0/schemas
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
@@ -97,17 +97,17 @@ PATH = /home/najmiddin/.local/bin:/home/najmiddin/anaconda3/condabin:/home/najmi
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/Najmiddin:@/tmp/.ICE-unix/1468,unix/Najmiddin:/tmp/.ICE-unix/1468
+SESSION_MANAGER = local/Najmiddin:@/tmp/.ICE-unix/1461,unix/Najmiddin:/tmp/.ICE-unix/1461
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
 GDK_PIXBUF_MODULE_FILE = /home/najmiddin/snap/code/common/.cache/gdk-pixbuf-loaders.cache
 # environment
-SNAP = /snap/code/97
+SNAP = /snap/code/98
 # environment
 GOPATH = /home/najmiddin/projects/go
 # environment
-SNAP_VERSION = c3511e6c
+SNAP_VERSION = 4af164ea
 # environment
 XDG_MENU_PREFIX = gnome-
 # environment
@@ -117,9 +117,9 @@ DISABLE_WAYLAND = 1
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = 74a920e31958478588f54bff19be1c1e
+INVOCATION_ID = a1b705a781aa4542abe9838d081b34ea
 # environment
-GDK_PIXBUF_MODULEDIR = /snap/code/97/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
+GDK_PIXBUF_MODULEDIR = /snap/code/98/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -129,7 +129,7 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 3633
+GIO_LAUNCHED_DESKTOP_FILE_PID = 22288
 # automatic
 %F = $(notdir $%)
 # environment
@@ -145,7 +145,7 @@ PWD = /home/najmiddin/go/src/github.com/NajmiddinAbdulhakim/user-service
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 1387
+SSH_AGENT_PID = 1384
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
@@ -159,7 +159,7 @@ LESSCLOSE = /usr/bin/lesspipe %s %s
 # environment
 VSCODE_CLI = 1
 # environment
-VSCODE_CODE_CACHE_PATH = /home/najmiddin/.config/Code/CachedData/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5
+VSCODE_CODE_CACHE_PATH = /home/najmiddin/.config/Code/CachedData/4af164ea3a06f701fe3e89a2bcbb421d2026b68f
 # environment
 LOGNAME = najmiddin
 # environment
@@ -191,19 +191,19 @@ MAKECMDGOALS := all
 # environment
 QT_IM_MODULE = ibus
 # environment
-SNAP_USER_DATA = /home/najmiddin/snap/code/97
+SNAP_USER_DATA = /home/najmiddin/snap/code/98
 # environment
 SHLVL = 0
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-e1212d9d-d1f3-42d7-946b-da3dc6b90378.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-70e73cf0-2dd2-443a-933f-401d520104a0.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
 USER = najmiddin
 # environment
-SNAP_REVISION = 97
+SNAP_REVISION = 98
 # environment
 LC_MONETARY = uz_UZ.UTF-8
 # makefile
@@ -223,7 +223,7 @@ MAKE_COMMAND := make
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /run/user/1000/vscode-0458206f-1.67.2-main.sock
+VSCODE_IPC_HOOK = /run/user/1000/vscode-0458206f-1.68.0-main.sock
 # makefile (from 'Makefile', line 1)
 CURRENT_DIR = $(shell pwd)
 # environment
@@ -279,14 +279,14 @@ WINDOWPATH = 2
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # default
- 
 .RECIPEPREFIX := 
+ 
 # environment
 LC_ADDRESS = uz_UZ.UTF-8
 # environment
 LANG = C
 # environment
-VSCODE_PID = 3695
+VSCODE_PID = 22341
 # environment
 _CE_CONDA = 
 # variable set hash-table stats:
@@ -357,6 +357,6 @@ build:
 # strcache performance: lookups = 30 / hit rate = 20%
 # hash-table stats:
 # Load=24/8192=0%, Rehash=0, Collisions=1/30=3%
-# Finished Make data base on Fri Jun 10 07:04:42 2022
+# Finished Make data base on Sat Jun 11 09:41:51 2022
 
  

@@ -3,12 +3,12 @@ package main
 import (
 	"net"
 
-	"github.com/template-service/config"
-	pb "github.com/template-service/genproto"
-	"github.com/template-service/pkg/db"
-	"github.com/template-service/pkg/logger"
-	"github.com/template-service/service"
-	grpcClient "github.com/template-service/service/grpc_client"
+	"github.com/NajmiddinAbdulhakim/user-service/config"
+	pb "github.com/NajmiddinAbdulhakim/user-service/genproto"
+	"github.com/NajmiddinAbdulhakim/user-service/pkg/db"
+	"github.com/NajmiddinAbdulhakim/user-service/pkg/logger"
+	"github.com/NajmiddinAbdulhakim/user-service/service"
+	grpcClient "github.com/NajmiddinAbdulhakim/user-service/service/grpc_client"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -32,7 +32,7 @@ func main() {
 	grpcC, err := grpcClient.New(cfg)
 	if err != nil {
 		log.Fatal("grpc connection to postservice error", logger.Error(err))
-		return 
+		return
 	}
 
 	userService := service.NewUserService(connDB, log, grpcC)

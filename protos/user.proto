@@ -67,9 +67,6 @@ message UpdateUserReq {
     repeated Address addresses = 7;
     string bio = 8;
     string status = 9;
-    string createdAt = 10;
-    string updatedAt = 11;
-    string deletedAt = 12;
 }
 
 message UpdateUserRes {
