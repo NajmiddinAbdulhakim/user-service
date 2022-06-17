@@ -7,6 +7,7 @@ import (
 
 	"github.com/gofrs/uuid"
 
+	// "github.com/huandu/go-sqlbuilder"
 	pb "github.com/NajmiddinAbdulhakim/user-service/genproto"
 	"github.com/jmoiron/sqlx"
 	"github.com/lib/pq"
@@ -76,7 +77,7 @@ func (r *UserRepo) UpdateUser(user *pb.UpdateUserReq) (bool, error) {
 	_, err := r.db.Exec(query, user.FirstName, user.LastName, user.UserName,
 		user.Email, pq.Array(user.PhoneNumber), user.Bio, user.Status, time, user.Id)
 	if err != nil {
-		return false, err
+		return false, fmt.Errorf(`kalla > %v`, err)
 	}
 	queryA := `UPDATE addresses SET country = $1, city = $2, district = $3, postalcode = $4 WHERE user_id = $5 AND id = $6`
 	for _, addr := range user.Addresses {
@@ -258,3 +259,19 @@ func (r *UserRepo) GetListUsers(page, limit int64) ([]*pb.User, int64, error) {
 	}
 	return users, count, nil
 }
+
+// func (r *UserRepo) GetFilteredUser(userID string)([]*pb.User) {
+// 	sql := sqlbuilder.Select("id","first_name","last_name").From("users"), 
+// 		Where("id = $1")
+	
+// 	var user *pb.User
+// 	err := r.db.QueryRow(sql, userID).Scan(
+// 		&user.Id,
+// 		&user.FirstName,
+// 		&user.LastName
+// 	)
+// 	if err != nil {
+// 		return nil, err
+// 	}
+// 	return &user,err
+// }

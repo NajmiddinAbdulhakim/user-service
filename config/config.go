@@ -35,7 +35,7 @@ func Load() Config {
 	c.PostgresPassword = cast.ToString(getOrReturnDefault("POSTGRES_PASSWORD", "1234"))
 
 	c.PostServiceHost = cast.ToString(getOrReturnDefault("POST_SERVICE_HOST", "localhost"))
-	c.PostServicePort = cast.ToInt(getOrReturnDefault("POST_SERVICE_PORT", 7100))
+	c.PostServicePort = cast.ToInt(getOrReturnDefault("POST_SERVICE_PORT", 2222))
 	c.LogLevel = cast.ToString(getOrReturnDefault("LOG_LEVEL", "debug"))
 
 	c.RPCPort = cast.ToString(getOrReturnDefault("RPC_PORT", ":9999"))

@@ -3,6 +3,7 @@ package postgres
 import (
 	"reflect"
 	"testing"
+	_"time"
 
 	pb "github.com/NajmiddinAbdulhakim/user-service/genproto"
 )
@@ -17,11 +18,11 @@ func TestUserRepo_Create(t *testing.T) {
 		{
 			name: `success case`,
 			input: pb.User{
-				FirstName: "test usersfdsa",
+				FirstName: "test usSDFASDFSADFSDAF",
 				LastName: "test",
 			}, 
 			want : pb.User{
-				FirstName: "test user",
+				FirstName: "test usSDFASDFSADFSDAF",
 				LastName: "test",
 			},
 			wantErr: false, 
@@ -34,8 +35,9 @@ func TestUserRepo_Create(t *testing.T) {
 				t.Fatalf(`%s: expected: %v, got: %v`,tc.name, tc.wantErr, err)
 			}
 			got.Id = ""
+			got.CreatedAt = ""
 			if !reflect.DeepEqual(&tc.want, got) {
-				t.Fatalf(`%s: expected: %v, got: %v`,tc.name, tc.want, err)
+				t.Fatalf(`%s: expected: %v, got: %v`,tc.name, tc.want, got)
 
 			}
 		})

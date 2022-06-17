@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Jun 11 09:41:51 2022
+# Make data base, printed on Fri Jun 17 09:27:48 2022
 
 # Variables
 
@@ -51,7 +51,7 @@ SNAP_DATA = /var/snap/code/98
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
-JOURNAL_STREAM = 8:47624
+JOURNAL_STREAM = 8:45543
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # environment
@@ -79,7 +79,7 @@ VSCODE_VERBOSE_LOGGING = true
 # environment
 _ = /snap/code/98/usr/share/code/code
 # environment
-MANAGERPID = 1042
+MANAGERPID = 1038
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
@@ -93,11 +93,11 @@ GSETTINGS_SCHEMA_DIR = /snap/code/98/usr/share/glib-2.0/schemas
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
-PATH = /home/najmiddin/.local/bin:/home/najmiddin/anaconda3/condabin:/home/najmiddin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/go/bin
+PATH = /usr/local/go/bin:/home/najmiddin/.local/bin:/home/najmiddin/anaconda3/condabin:/home/najmiddin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/bin
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/Najmiddin:@/tmp/.ICE-unix/1461,unix/Najmiddin:/tmp/.ICE-unix/1461
+SESSION_MANAGER = local/Najmiddin:@/tmp/.ICE-unix/1484,unix/Najmiddin:/tmp/.ICE-unix/1484
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -105,7 +105,7 @@ GDK_PIXBUF_MODULE_FILE = /home/najmiddin/snap/code/common/.cache/gdk-pixbuf-load
 # environment
 SNAP = /snap/code/98
 # environment
-GOPATH = /home/najmiddin/projects/go
+GOPATH = /home/najmiddin/go
 # environment
 SNAP_VERSION = 4af164ea
 # environment
@@ -117,7 +117,7 @@ DISABLE_WAYLAND = 1
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = a1b705a781aa4542abe9838d081b34ea
+INVOCATION_ID = 48398f1c5a714fe0b9a23127fc819d99
 # environment
 GDK_PIXBUF_MODULEDIR = /snap/code/98/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
 # default
@@ -129,9 +129,11 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 22288
+GIO_LAUNCHED_DESKTOP_FILE_PID = 38178
 # automatic
 %F = $(notdir $%)
+# environment
+GOBIN = /home/najmiddin/go/bin
 # environment
 DISPLAY = :0
 # environment
@@ -145,13 +147,13 @@ PWD = /home/najmiddin/go/src/github.com/NajmiddinAbdulhakim/user-service
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 1384
+SSH_AGENT_PID = 1408
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
 GTK_MODULES = gail:atk-bridge
 # environment
-GOMODCACHE = /home/najmiddin/projects/go/pkg/mod
+GOMODCACHE = /home/najmiddin/go/pkg/mod
 # environment
 HOME = /home/najmiddin
 # environment
@@ -197,7 +199,7 @@ SHLVL = 0
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-70e73cf0-2dd2-443a-933f-401d520104a0.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-eeb54c51-a4ca-4c1c-a932-5f8d9939d146.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -279,18 +281,18 @@ WINDOWPATH = 2
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # default
-.RECIPEPREFIX := 
  
+.RECIPEPREFIX := 
 # environment
 LC_ADDRESS = uz_UZ.UTF-8
 # environment
 LANG = C
 # environment
-VSCODE_PID = 22341
+VSCODE_PID = 38230
 # environment
 _CE_CONDA = 
 # variable set hash-table stats:
-# Load=138/1024=13%, Rehash=0, Collisions=25/163=15%
+# Load=139/1024=14%, Rehash=0, Collisions=25/164=15%
 
 # Pattern-specific Variable Values
 
@@ -298,9 +300,9 @@ _CE_CONDA =
 
 # Directories
 
-# . (device 66309, inode 2371184): 17 files, no impossibilities.
+# . (device 66308, inode 2898785): 18 files, no impossibilities.
 
-# 17 files, no impossibilities in 1 directories.
+# 18 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -351,12 +353,12 @@ build:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 24 / storage = 178 B / avg = 7 B
-# current buf: size = 8162 B / used = 178 B / count = 24 / avg = 7 B
+# strcache buffers: 1 (0) / strings = 25 / storage = 189 B / avg = 7 B
+# current buf: size = 8162 B / used = 189 B / count = 25 / avg = 7 B
 
-# strcache performance: lookups = 30 / hit rate = 20%
+# strcache performance: lookups = 31 / hit rate = 19%
 # hash-table stats:
-# Load=24/8192=0%, Rehash=0, Collisions=1/30=3%
-# Finished Make data base on Sat Jun 11 09:41:51 2022
+# Load=25/8192=0%, Rehash=0, Collisions=1/31=3%
+# Finished Make data base on Fri Jun 17 09:27:48 2022
 
  
