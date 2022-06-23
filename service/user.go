@@ -131,3 +131,12 @@ func (s *UserService) GetListUsers(ctx context.Context, req *pb.GetUserListReq) 
 	return &pb.GetUserListRes{Users: us, Count: count}, nil
 
 }
+
+func (s *UserService) CheckUnique(ctx context.Context, req *pb.CheckUniqueReq) (*pb.CheckUniqueResp, error) {
+	exists, err := s.storage.User().CheckUnique(req.Field, req.Value)
+	if err != nil {
+		s.logger.Error(`Filed check unique for user data`, l.Error(err))
+		return nil, status.Error(codes.Internal, `Filed to check unique for user data`)
+	}
+	return &pb.CheckUniqueResp{IsExists: exists}, nil
+}

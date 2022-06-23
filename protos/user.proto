@@ -13,6 +13,16 @@ service UserService {
 
     rpc GetUserByIdWithPosts(UserByIdReq) returns (User);
     rpc GetListUsers(GetUserListReq) returns (GetUserListRes);
+    rpc CheckUnique(CheckUniqueReq) returns (CheckUniqueResp);
+}
+
+message CheckUniqueReq {
+    string field = 1;
+    string value = 2;
+}
+
+message CheckUniqueResp {
+    bool is_exists = 1;
 }
 
 message GetUserListReq {

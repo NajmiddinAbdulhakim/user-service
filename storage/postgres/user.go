@@ -27,7 +27,6 @@ func (r *UserRepo) CreateUser(user *pb.User) (*pb.User, error) {
 	if err != nil {
 		return nil, err
 	}
-	id, _ := uuid.NewV4()
 	time := time.Now()
 
 	var usr pb.User
@@ -35,7 +34,7 @@ func (r *UserRepo) CreateUser(user *pb.User) (*pb.User, error) {
         id, first_name, last_name, user_name, email, phone_number, bio, status, created_at)
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) 
         RETURNING id, first_name, last_name, user_name, email, phone_number, bio, status, created_at`
-	err = tx.QueryRow(query, id, user.FirstName, user.LastName, user.UserName, user.Email, pq.Array(user.PhoneNumber), user.Bio, user.Status, time).Scan(
+	err = tx.QueryRow(query, user.Id, user.FirstName, user.LastName, user.UserName, user.Email, pq.Array(user.PhoneNumber), user.Bio, user.Status, time).Scan(
 		&usr.Id,
 		&usr.FirstName,
 		&usr.LastName,
@@ -258,6 +257,20 @@ func (r *UserRepo) GetListUsers(page, limit int64) ([]*pb.User, int64, error) {
 		return nil, 0, err
 	}
 	return users, count, nil
+}
+
+func (r *UserRepo) CheckUnique(field, value string) (bool, error) {
+	var exists int64
+	err := r.db.QueryRow(`SELECT COUNT(*) FROM users WHERE $1 = $2`, field, value).Scan(
+		&exists,
+	)
+	if err != nil {
+		return false, err
+	}
+	if exists > 0 {
+		return true, nil
+	}
+	return false, nil
 }
 
 // func (r *UserRepo) GetFilteredUser(userID string)([]*pb.User) {

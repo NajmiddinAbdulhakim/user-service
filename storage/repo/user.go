@@ -13,4 +13,5 @@ type UserStorageI interface {
 	DeleteUser(userID string) (bool, error)
 
 	GetListUsers(page, limit int64) ([]*pb.User, int64, error)
+	CheckUnique(field, value string) (bool, error)
 }
