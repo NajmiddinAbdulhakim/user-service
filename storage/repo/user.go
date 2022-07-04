@@ -8,6 +8,7 @@ import (
 type UserStorageI interface {
 	CreateUser(*pb.User) (*pb.User, error)
 	UpdateUser(*pb.UpdateUserReq) (bool, error)
+	LoginUser(email string) (*pb.User, error)
 	GetUserById(userID string) (*pb.User, error)
 	GetAllUsers() ([]*pb.User, error)
 	DeleteUser(userID string) (bool, error)

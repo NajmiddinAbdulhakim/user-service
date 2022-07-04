@@ -75,6 +75,15 @@ func (s *UserService) GetUserByIdWithPosts(ctx context.Context, req *pb.UserById
 	return user, nil
 }
 
+func (s *UserService) LoginUser(ctx context.Context, req *pb.LoginUserReq) (*pb.User, error) {
+	user, err := s.storage.User().LoginUser(req.Email)
+	if err != nil {
+		s.logger.Error(`Filed while login user`, l.Error(err))
+		return nil, status.Error(codes.Internal, `Filed while login user`)
+	}
+	return user, nil
+}
+
 func (s *UserService) GetUserById(ctx context.Context, req *pb.UserByIdReq) (*pb.User, error) {
 	user, err := s.storage.User().GetUserById(req.Id)
 	if err != nil {

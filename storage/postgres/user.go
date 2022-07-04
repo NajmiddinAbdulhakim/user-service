@@ -88,6 +88,30 @@ func (r *UserRepo) UpdateUser(user *pb.UpdateUserReq) (bool, error) {
 	return true, nil
 }
 
+func (r *UserRepo) LoginUser(email string) (*pb.User, error) {
+	var user *pb.User
+	query := `SELECT id, first_name, last_name, username, email, password, 
+	phone_number, bio, status FROM users WHERE email = $1`
+	err := r.db.QueryRow(query,email).Scan(
+		&user.Id,
+		&user.FirstName,
+		&user.LastName,
+		&user.UserName,
+		&user.Email,
+		&user.Password,
+		&user.PhoneNumber,
+		&user.Bio,
+		&user.Status,
+	)
+	if err != nil {
+		return nil, err
+	}
+	if user.Id == "" {
+		return nil,nil
+	}
+	return user, nil
+}
+
 func (r *UserRepo) GetUserById(userID string) (*pb.User, error) {
 	var usr pb.User
 	query := `SELECT id, first_name, last_name, user_name, 

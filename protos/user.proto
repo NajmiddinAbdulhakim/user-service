@@ -7,6 +7,7 @@ import "post.proto";
 service UserService {
     rpc CreateUser(User) returns (User);
     rpc UpdateUser(UpdateUserReq) returns (UpdateUserRes);
+    rpc LoginUser(LoginUserReq) returns (User);
     rpc GetUserById(UserByIdReq) returns (User);
     rpc GetAllUsers(Empty) returns (GetAllUsersResponse);
     rpc DeleteUser(UserByIdReq) returns (UpdateUserRes);
@@ -14,6 +15,9 @@ service UserService {
     rpc GetUserByIdWithPosts(UserByIdReq) returns (User);
     rpc GetListUsers(GetUserListReq) returns (GetUserListRes);
     rpc CheckUnique(CheckUniqueReq) returns (CheckUniqueResp);
+}
+message LoginUserReq {
+    string email = 1;
 }
 
 message CheckUniqueReq {
@@ -41,14 +45,15 @@ message User {
     string last_name = 3;
     string user_name = 4;
     string email = 5;
-    repeated string phone_number = 6;
-    repeated Address addresses = 7;
-    repeated Post posts = 8;
-    string bio = 9;
-    string status = 10;
-    string createdAt = 11;
-    string updatedAt = 12;
-    string deletedAt = 13;
+    string password = 6;
+    repeated string phone_number = 7;
+    repeated Address addresses = 8;
+    repeated Post posts = 9;
+    string bio = 10;
+    string status = 11;
+    string createdAt = 12;
+    string updatedAt = 13;
+    string deletedAt = 14;
 }
 
 message Address {

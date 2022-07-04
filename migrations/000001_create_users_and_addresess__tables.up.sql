@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS users (
     last_name varchar(50) NOT NULL,
     user_name varchar(50) NOT NULL,
     email varchar(50) NOT NULL,
+    password varchar(50) NOT NULL,
     phone_number TEXT [],
     bio TEXT,
     status varchar(50),
