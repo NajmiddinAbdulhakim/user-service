@@ -26,24 +26,24 @@ type Config struct {
 func Load() Config {
 	c := Config{}
 
-	c.Environment = cast.ToString(getOrReturnDefault("ENVIRONMENT", "develop"))
+	c.Environment = cast.ToString(look("ENVIRONMENT", "develop"))
 
-	c.PostgresHost = cast.ToString(getOrReturnDefault("POSTGRES_HOST", "localhost"))
-	c.PostgresPort = cast.ToInt(getOrReturnDefault("POSTGRES_PORT", 5432))
-	c.PostgresDatabase = cast.ToString(getOrReturnDefault("POSTGRES_DATABASE", "userdb"))
-	c.PostgresUser = cast.ToString(getOrReturnDefault("POSTGRES_USER", "najmiddin"))
-	c.PostgresPassword = cast.ToString(getOrReturnDefault("POSTGRES_PASSWORD", "1234"))
+	c.PostgresHost = cast.ToString(look("POSTGRES_HOST", "localhost"))
+	c.PostgresPort = cast.ToInt(look("POSTGRES_PORT", 5432))
+	c.PostgresDatabase = cast.ToString(look("POSTGRES_DATABASE", "userdb"))
+	c.PostgresUser = cast.ToString(look("POSTGRES_USER", "najmiddin"))
+	c.PostgresPassword = cast.ToString(look("POSTGRES_PASSWORD", "1234"))
 
-	c.PostServiceHost = cast.ToString(getOrReturnDefault("POST_SERVICE_HOST", "localhost"))
-	c.PostServicePort = cast.ToInt(getOrReturnDefault("POST_SERVICE_PORT", 2222))
-	c.LogLevel = cast.ToString(getOrReturnDefault("LOG_LEVEL", "debug"))
+	c.PostServiceHost = cast.ToString(look("POST_SERVICE_HOST", "localhost"))
+	c.PostServicePort = cast.ToInt(look("POST_SERVICE_PORT", 2222))
+	c.LogLevel = cast.ToString(look("LOG_LEVEL", "debug"))
 
-	c.RPCPort = cast.ToString(getOrReturnDefault("RPC_PORT", ":9999"))
+	c.RPCPort = cast.ToString(look("RPC_PORT", ":9999"))
 
 	return c
 }
 
-func getOrReturnDefault(key string, defaultValue interface{}) interface{} {
+func look(key string, defaultValue interface{}) interface{} {
 	_, exists := os.LookupEnv(key)
 	if exists {
 		return os.Getenv(key)
