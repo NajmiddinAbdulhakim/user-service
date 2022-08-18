@@ -1,5 +1,0 @@
-make --dry-run --always-make --keep-going --print-directory
-make: Entering directory '/home/najmiddin/go/src/github.com/NajmiddinAbdulhakim/user-service'
-CGO_ENABLED=0 GOOS=linux go build -mod=vendor -a -installsuffix cgo -o /home/najmiddin/go/src/github.com/NajmiddinAbdulhakim/user-service/bin/ /main.go
-make: Leaving directory '/home/najmiddin/go/src/github.com/NajmiddinAbdulhakim/user-service'
- 
